@@ -124,7 +124,7 @@ Once completed without issues reload Systemd.
 systemctl daemon-reload
 ```
 
-Retsart services.
+Restart services.
 
 ```
 sudo systemctl restart netbox netbox-rq
