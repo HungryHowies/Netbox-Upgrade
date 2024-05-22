@@ -27,6 +27,9 @@ Check  new version is installed
 ```
 pip3 list
 ```
+![image](https://github.com/HungryHowies/Netbox-Upgrade/assets/22652276/445a65e2-47ac-43ea-ba5d-e02f946325a1)
+
+
 
 ### The Netbox upgrade script does the following action,  
 
