@@ -1,6 +1,6 @@
 # Netbox Upgrade Procedure
 
-These instructions will show how to upgrade from Netbox-v3.6.5 to Netbox-v3.7.3 using the download option (wget).
+These instructions will show how to upgrade from Netbox-v3.6.5 to Netbox-v3.7.8 using the download option (wget).
 
 Netbox has a upgrade script that can be used. Since this is a minor version there is no upgrade path needed. Ensure to make backups before starting. 
 
@@ -34,43 +34,28 @@ NetBox releases are located [here](https://github.com/netbox-community/netbox/re
 Download new release package.
 
 ```
-wget https://github.com/netbox-community/netbox/archive/refs/tags/v3.7.3.tar.gz
+wget https://github.com/netbox-community/netbox/archive/refs/tags/v3.7.8.tar.gz
 ```
 
 Extract new version to /opt directory.
 
 ```
-tar -xzf v3.7.3.tar.gz -C /opt
-```
-
-Link netbox-3.7.3 directory to /opt/netbox directory.
-
-```
-sudo ln -sfn /opt/netbox-3.7.3/ /opt/netbox
+tar -xzf v3.7.8.tar.gz -C /opt
 ```
 
 Copy the following files over.
 
 ```
-sudo cp /opt/netbox-3.6.5/local_requirements.txt /opt/netbox/
+sudo cp /opt/netbox-3.6.5/local_requirements.txt /opt/netbox-3.7.8/
 ```
 ```
-sudo cp /opt/netbox-3.6.5/netbox/netbox/configuration.py /opt/netbox/netbox/netbox/
-```
-
-```
-sudo cp /opt/netbox-3.6.5/DCIM.xml /opt/netbox/DCIM.xml
+sudo cp /opt/netbox-3.6.5/netbox/netbox/configuration.py /opt/netbox-3.7.8/netbox/netbox/
 ```
 
+```
+sudo cp /opt/netbox-3.6.5/DCIM.xml /opt/netbox-3.7.8/DCIM.xml
+```
 
-Copy **local_requirements.txt**  and  **configuration.py** from the current installation to the new version.
-
-```
-sudo cp /opt/netbox-3.6.5/local_requirements.txt /opt/netbox/
-```
-```
-sudo cp /opt/netbox-3.6.5/netbox/netbox/configuration.py /opt/netbox/netbox/netbox/
-```
 
 Replicate your uploaded media.
 
@@ -81,16 +66,22 @@ sudo cp -pr /opt/netbox-3.6.5/netbox/media/ /opt/netbox/netbox/
 copy or link any custom scripts and reports that you've made.
 
 ```
-sudo cp -r /opt/netbox-3.6.5/netbox/scripts /opt/netbox/netbox/
+sudo cp -r /opt/netbox-3.6.5/netbox/scripts /opt/netbox-3.7.8/netbox/
 ```
 ```
-sudo cp -r /opt/netbox-3.6.5/netbox/reports /opt/netbox/netbox/
+sudo cp -r /opt/netbox-3.6.5/netbox/reports /opt/netbox-3.7.8/netbox/
 ```
 
 Copy gunicorn.py file.
 
 ```
-sudo cp /opt/netbox-3.6.5/gunicorn.py /opt/netbox/
+sudo cp /opt/netbox-3.6.5/gunicorn.py /opt/netbox-3.7.8/
+```
+
+Link netbox-3.7.3 directory to /opt/netbox directory.
+
+```
+sudo ln -sfn /opt/netbox-3.7.8/ /opt/netbox
 ```
 
 ###  Upgrade Script.
