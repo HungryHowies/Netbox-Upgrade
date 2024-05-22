@@ -1,1 +1,93 @@
+##Netbox v4.0.2 Upgrade Procedure.
 
+Netbox v4.0.x has a few release changes. New packages need to be upgrade.
+
+### Prerequisite:
+
+* Ubunt-22.0.4
+* All updates/upgrade completed
+* NetBox-v3.7.8 installed
+* Python-v3.10.x installed
+
+### Upgrade Netbox SAML Plugin
+
+Update Instance
+
+```
+apt update && apt upgrade
+```
+
+Execute the following command to upgrade netbox-plugin-auth-saml2 plugin.
+
+```
+pip3 install --upgrade --user netbox-plugin-auth-saml2
+```
+Check  new version is installed
+
+```
+pip3 list
+```
+
+### The Netbox upgrade script does the following action,  
+
+* Destroys and rebuilds the Python virtual environment
+* Installs all required Python packages (listed in requirements.txt)
+* Installs any additional packages from local_requirements.txt
+* Applies any database migrations that were included in the release
+* Builds the documentation locally (for offline use)
+* Collects all static files to be served by the HTTP service
+* Deletes stale content types from the database
+* Deletes all expired user sessions from the database
+
+### Download and install NetBox-v4.0.2 package and Dependencies. 
+
+NetBox releases are located [here](https://github.com/netbox-community/netbox/releases).
+
+Download new release package.
+
+```
+wget https://github.com/netbox-community/netbox/archive/refs/tags/v4.0.2.tar.gz
+```
+
+Extract new version to /opt directory.
+
+```
+tar -xzf v4.0.2.tar.gz -C /opt
+```
+
+Copy the following files over.
+
+```
+sudo cp /opt/netbox-3.7.8/local_requirements.txt /opt/netbox-4.0.2/
+```
+```
+sudo cp /opt/netbox-3.7.8/netbox/netbox/configuration.py /opt/netbox-4.0.2/netbox/netbox/
+```
+
+```
+sudo cp /opt/netbox-3.7.8/DCIM.xml /opt/netbox-4.0.2/DCIM.xml
+```
+
+
+Replicate your uploaded media.
+
+ ```
+sudo cp -pr /opt/netbox-3.7.8/netbox/media/ /opt/netbox-4.0.2/netbox/
+```
+
+copy or link any custom scripts and reports that you've made.
+
+```
+sudo cp -r /opt/netbox-3.7.8/netbox/scripts /opt/netbox-4.0.2/netbox/
+```
+```
+sudo cp -r /opt/netbox-3.7.8/netbox/reports /opt/netbox-4.0.2/netbox/
+```
+
+Copy gunicorn.py file.
+
+```
+sudo cp /opt/netbox-3.7.8/gunicorn.py /opt/netbox-4.0.2/
+```
+
+ 
