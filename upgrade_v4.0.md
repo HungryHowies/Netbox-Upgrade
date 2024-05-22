@@ -68,10 +68,9 @@ sudo cp /opt/netbox-3.7.8/netbox/netbox/configuration.py /opt/netbox-4.0.2/netbo
 sudo cp /opt/netbox-3.7.8/DCIM.xml /opt/netbox-4.0.2/DCIM.xml
 ```
 
-
 Replicate your uploaded media.
 
- ```
+```
 sudo cp -pr /opt/netbox-3.7.8/netbox/media/ /opt/netbox-4.0.2/netbox/
 ```
 
@@ -90,4 +89,47 @@ Copy gunicorn.py file.
 sudo cp /opt/netbox-3.7.8/gunicorn.py /opt/netbox-4.0.2/
 ```
 
+## Install Dependencies
+
+```
+pip install -r /opt/netbox-4.0.2/requirements.txt
+```
+
+Link netbox-3.7.3 directory to /opt/netbox directory.
+
+```
+sudo ln -sfn /opt/netbox-4.0.2/ /opt/netbox
+```
+
+###  Upgrade Script.
+
+Change directory.
+
+```
+cd /opt/netbox
+```
+
+Execute upgrade script.
+
+```
+sudo ./upgrade.sh
+```
+
+Once completed without issues reload Systemd.
+
+```
+systemctl daemon-reload
+```
+
+Retsart services.
+
+```
+sudo systemctl restart netbox netbox-rq
+```
+
+Check service status.
+
+```
+sudo systemctl status  netbox netbox-rq
+```
  
